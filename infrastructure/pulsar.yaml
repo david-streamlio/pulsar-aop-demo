@@ -25,7 +25,7 @@ services:
       zookeeper:
         condition: service_healthy
     command: >
-      bash -c "bin/pulsar initialize-cluster-metadata -c pulsar-cluster -zk zookeeper:2181 -cs zookeeper:2181 -uw http://pulsar-cluster-kafka-1:8080,pulsar-cluster-kafka-2:8080"
+      bash -c "bin/pulsar initialize-cluster-metadata -c pulsar-cluster -zk zookeeper:2181 -cs zookeeper:2181 -uw http://pulsar-cluster-pulsar-1:8080"
 
   bookie:
     image: streamnative/sn-pulsar:2.10.1.4
@@ -52,8 +52,8 @@ services:
 
   broker:
     image: streamnative/sn-pulsar:2.10.1.4
-    container_name: pulsar
-    hostname: pulsar
+    container_name: pulsar-1
+    hostname: pulsar-1
     depends_on:
       - bookie
     command: >
@@ -67,11 +67,10 @@ services:
       PULSAR_PREFIX_managedLedgerDefaultEnsembleSize: 1
       PULSAR_PREFIX_managedLedgerDefaultWriteQuorum: 1
       PULSAR_PREFIX_managedLedgerDefaultAckQuorum: 1
-      PULSAR_PREFIX_amqpListeners: amqp://broker-1:5672
+      PULSAR_PREFIX_amqpListeners: amqp://pulsar-1:5672
     ports:
       - 6650:6650 # Pulsar Binary
       - 8080:8080
-      - 9092:9092 # Kafka Binary
       - 5672:5672 # AMQP
     healthcheck:
       interval: 5s
@@ -80,4 +79,4 @@ services:
 
 networks:
   default:
-    name: multi-protocol-pulsar
+    name: amqp-protocol-pulsar
