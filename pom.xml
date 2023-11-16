@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
+    <groupId>io.streamnative.demos</groupId>
     <artifactId>AoP</artifactId>
     <version>1.0</version>
 
@@ -12,7 +12,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <amqp-client.version>3.6.3</amqp-client.version>
+        <amqp-client.version>3.5.3</amqp-client.version>
         <!-- 5.20.0, 4.12.0, 4.0.3, 3.6.3, 3.5.3, 3.0.2, 2.8.3, 2.0.0 -->
     </properties>
 

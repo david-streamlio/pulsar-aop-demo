@@ -7,23 +7,26 @@ import java.io.UnsupportedEncodingException;
 
 public class RabbitMQDemo {
 
-    private final static String QUEUE_NAME = "example_queue";
-    private final static String AMQP_HOST = "192.168.1.121";
+    private final static String QUEUE_NAME = "example_queue2";
+    private final static String AMQP_HOST = "192.168.1.120";
     private final static int AMQP_PORT = 5672;
     private final static String VIRTUAL_HOST_NAME = "vhost1";
-    private static final String EXCHANGE_NAME = "ex";
 
-    private static final String RABBIT_CLIENT_VERSION = "3.6.3";
+    private static final String RABBIT_CLIENT_VERSION = "3.5.3";
 
     static ConnectionFactory getConnectionFactory() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(AMQP_HOST);
         factory.setPort(AMQP_PORT);
-        factory.setVirtualHost(VIRTUAL_HOST_NAME);
+      //  factory.setVirtualHost(VIRTUAL_HOST_NAME);
         return factory;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+        System.out.println(String.format("Connecting to %s:%d", AMQP_HOST, AMQP_PORT));
+        Thread.sleep(5000);
+
         // Create a producer thread
         Thread producerThread = new Thread(() -> {
             try {
@@ -39,6 +42,7 @@ public class RabbitMQDemo {
                 for (int i = 1; i <= 999999; i++) {
                     String message = String.format("Message %d sent with RabbitMQ client library version %s",
                             i, RABBIT_CLIENT_VERSION);
+                    System.out.println("Sending " + message);
                     channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
                     Thread.sleep(1000); // Simulate some delay
                 }

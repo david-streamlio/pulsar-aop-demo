@@ -3,7 +3,7 @@
 INFRA_DIR="../infrastructure"
 
 
-docker compose --project-name persistence --file $INFRA_DIR/pulsar.yaml up -d
+docker compose --project-name pulsar --file $INFRA_DIR/pulsar.yaml up -d
 
 ################################################
 # Wait 15 seconds for Pulsar to start
