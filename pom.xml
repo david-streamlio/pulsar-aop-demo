@@ -9,16 +9,18 @@
     <version>1.0</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <amqp-client.version>3.6.3</amqp-client.version>
+        <!-- 5.20.0, 4.12.0, 4.0.3, 3.6.3, 3.5.3, 3.0.2, 2.8.3, 2.0.0 -->
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
-            <version>5.16.0</version>
+            <version>${amqp-client.version}</version>
         </dependency>
     </dependencies>
 
@@ -37,7 +39,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        org.example.Main
+                                        io.streamnative.demos.aop.RabbitMQDemo
                                     </mainClass>
                                 </manifest>
                             </archive>
